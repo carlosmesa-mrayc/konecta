@@ -54,20 +54,6 @@ public class ProductSaleController {
                                 .build()))
                 );
     }
-    @GetMapping(value="/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseEntity<ResponseDto>> getAllProduct() {
-        return productSaleUseCase.findAll()
-                .collectList()
-                .flatMap(items -> null != items && !items.isEmpty() ?
-                        Mono.just(ResponseEntity.ok().body(ResponseDto.builder()
-                                .message("Se retornan las ventas de los productos correctamente")
-                                .object(items).build())) :
-                        Mono.just(ResponseEntity.ok().body(ResponseDto.builder()
-                                .message("No hay información para mostrar de las ventas de productos")
-                                .build()))
-                );
-
-    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

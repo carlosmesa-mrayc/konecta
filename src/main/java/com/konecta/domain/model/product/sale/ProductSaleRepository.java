@@ -5,7 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface ProductSaleRepository {
     Mono<ProductSale> save(ProductSale productSale);
-    Flux<ProductSale> findAll();
-
     Mono<ProductSale> findSaleMax();
 }

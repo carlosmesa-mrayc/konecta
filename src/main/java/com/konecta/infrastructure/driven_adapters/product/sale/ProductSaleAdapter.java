@@ -36,16 +36,6 @@ public class ProductSaleAdapter implements ProductSaleRepository {
                                 }) : Mono.just(ProductSale.builder().build()));
     }
     @Override
-    public Flux<ProductSale> findAll() {
-        return productSaleDataRepository.findAll()
-                .flatMap(items -> Mono.just(toModel(items)))
-                .onErrorResume(error -> {
-                    log.severe(String.format("Error presentado al devolver todas las ventas de productos ::: %s", error.getMessage()));
-                    return Mono.just(ProductSale.builder().build());
-                });
-    }
-
-    @Override
     public Mono<ProductSale> findSaleMax() {
         return productSaleDataRepository.findSaleMax()
                 .flatMap(productSaleEntity ->
@@ -59,7 +49,6 @@ public class ProductSaleAdapter implements ProductSaleRepository {
                     return Mono.just(ProductSale.builder().build());
                 });
     }
-
     private ProductSaleEntity toEntity(Long productID, ProductSale productSale) {
         calendar = Calendar.getInstance();
         return ProductSaleEntity.builder()
@@ -68,14 +57,12 @@ public class ProductSaleAdapter implements ProductSaleRepository {
                 .created_date(calendar.toInstant())
                 .build();
     }
-
     private ProductSale toModel(ProductSaleEntity entity) {
         return null != entity && null != entity.getId() ? ProductSale.builder()
                 .createdDate(Date.from(entity.getCreated_date()))
                 .count(entity.getCount())
                 .product(Product.builder().build()).build() : ProductSale.builder().build();
     }
-
     private ProductSale toModelComplete(ProductSaleEntity entity, ProductEntity productEntity) {
         return null != entity && null != entity.getProduct_id() ? ProductSale.builder()
                 .count(entity.getCount())

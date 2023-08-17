@@ -22,3 +22,5 @@ Este proyecto permite visualizar la forma en que se debe crear un proyecto en JA
     * ProductSaleDataRepository
   * La creación de las tablas esta dada por un archivo .sql (resources/schema.sql) y ejecutado en el Application.java
   * Para la ejecución, se debe ingresar a la url (http://localhost:8080/swagger-ui/#/), donde se visualizaran los servicios y dentro de estos cada uno de los métodos para su ejecución.
+  * IDE de desarrollo: IntelliJ
+  * Administrador de dependencias: Maven

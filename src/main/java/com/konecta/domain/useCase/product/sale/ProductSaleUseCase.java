@@ -1,11 +1,9 @@
 package com.konecta.domain.useCase.product.sale;
 
-import com.konecta.domain.model.product.Product;
 import com.konecta.domain.model.product.sale.ProductSale;
 import com.konecta.domain.model.product.sale.ProductSaleRepository;
 import com.konecta.domain.useCase.product.ProductUseCase;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
@@ -36,11 +34,6 @@ public class ProductSaleUseCase {
                                 Mono.just(ProductSale.builder().status("NotSearch").build()))
         : Mono.just(ProductSale.builder().build());
     };
-
-    public Flux<ProductSale> findAll() {
-        return productSaleRepository.findAll();
-    }
-
     public Mono<ProductSale> findSaleMax() {
         return productSaleRepository.findSaleMax();
     };
